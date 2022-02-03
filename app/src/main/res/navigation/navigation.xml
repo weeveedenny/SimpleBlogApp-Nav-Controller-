@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/postFragment">
+
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.decagon.android.sq009.activities.PostFragment"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" />
+
+    <fragment
+        android:id="@+id/makeNewPostFragment"
+        android:name="com.decagon.android.sq009.activities.MakeNewPostFragment"
+        android:label="fragment_make_new_post"
+        tools:layout="@layout/fragment_make_new_post" />
+
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.decagon.android.sq009.activities.CommentsFragment"
+        android:label="fragment_comments"
+        tools:layout="@layout/fragment_comments">
+<!--        <action-->
+<!--            android:id="@+id/action_commentsFragment_to_makeNewPostFragment"-->
+<!--            app:destination="@id/makeNewPostFragment" />-->
+    </fragment>
+
+
+</navigation>
