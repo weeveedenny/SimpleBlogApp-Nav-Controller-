@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+            <variable
+                name="comment"
+                type="com.decagon.android.sq009.model.CommentModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="post"
+            type="com.decagon.android.sq009.model.PostModel"
+            />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +41,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/aclonica"
                     android:paddingTop="8dp"
-                    android:text="@string/title"
+                    android:text="@{post.title}"
                     android:textColor="@color/black"
                     android:textSize="13sp"
                     android:textStyle="bold"
@@ -54,7 +57,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="15dp"
-                    android:text="@string/body"
+                    android:text="@{post.body}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"

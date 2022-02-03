@@ -10,17 +10,20 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.android.sq009.R
 import com.decagon.android.sq009.adapters.CommentAdapter
+import com.decagon.android.sq009.databinding.FragmentCommentsBinding
 import com.decagon.android.sq009.model.CommentModel
 import com.decagon.android.sq009.repository.Repository
 import com.decagon.android.sq009.viewmodels.CommentViewModel
 import com.decagon.android.sq009.viewmodels.CommentViewModelFactory
 import kotlinx.android.synthetic.main.fragment_comments.*
+import java.util.zip.Inflater
 
 
 class CommentsFragment : Fragment() {
@@ -32,13 +35,15 @@ class CommentsFragment : Fragment() {
     lateinit var commentViewModelFactory: CommentViewModelFactory
     private var commentList = mutableListOf<CommentModel>()
     private var postId: String? = null
+    lateinit var binding : FragmentCommentsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_comments, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_comments, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

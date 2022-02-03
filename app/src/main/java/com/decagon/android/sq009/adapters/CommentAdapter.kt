@@ -3,27 +3,34 @@ package com.decagon.android.sq009.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.android.sq009.R
+import com.decagon.android.sq009.databinding.CommentItemBinding
 import com.decagon.android.sq009.model.CommentModel
 
 
 class CommentAdapter(private var recyclerViewCommentList: MutableList<CommentModel>):
+
     RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
 
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(val view: CommentItemBinding): RecyclerView.ViewHolder(view.root), View.OnClickListener{
 
-        val name: TextView = view.findViewById(R.id.comment_item_textView_name)
-        val email: TextView = view.findViewById(R.id.comment_item_textView_email)
-        val bodyTextView: TextView = view.findViewById(R.id.comment_item_textView_body)
+
+        override fun onClick(p0: View?) {
+        }
+
+        //Passing data to the variable in xml
+        fun bind (commentData: CommentModel){
+            view.comment = commentData
+            view.executePendingBindings()
+        }
     }
 
 
     //create the viewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(CommentItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
 
@@ -35,9 +42,7 @@ class CommentAdapter(private var recyclerViewCommentList: MutableList<CommentMod
 
     //bind the list with the viewHolders
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = recyclerViewCommentList[position].name
-        holder.email.text = recyclerViewCommentList[position].email
-        holder.bodyTextView.text = recyclerViewCommentList[position].body
+        holder.bind(recyclerViewCommentList[position])
 
     }
 

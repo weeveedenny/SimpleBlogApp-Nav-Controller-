@@ -9,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isEmpty
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.android.sq009.R
 import com.decagon.android.sq009.adapters.PostAdapter
+import com.decagon.android.sq009.databinding.FragmentPostBinding
 import com.decagon.android.sq009.model.PostModel
 import com.decagon.android.sq009.repository.Repository
 import com.decagon.android.sq009.viewmodels.PostViewModel
@@ -31,6 +33,7 @@ class PostFragment : Fragment(), PostAdapter.OnItemClickListener {
     lateinit var viewModelFactory: ViewModelFactory
     private val repository = Repository() // one
     private var newPost: String? = null
+    lateinit var binding : FragmentPostBinding
 
 
 
@@ -39,8 +42,11 @@ class PostFragment : Fragment(), PostAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_post, container, false)
+        binding  =  DataBindingUtil.inflate(inflater, R.layout.fragment_post, container, false)
+        return binding.root
     }
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,7 +54,7 @@ class PostFragment : Fragment(), PostAdapter.OnItemClickListener {
 
         //initialise the viewModel
         viewModel = ViewModelProvider(this, viewModelFactory).get(PostViewModel::class.java) // four
-        postRecyclerView = view.findViewById(R.id.postActivity_recyclerView)
+        postRecyclerView = view.findViewById(R.id.postFragment_recyclerView)
         postRecyclerView.setHasFixedSize(true)
         postRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         postRecyclerView.isNestedScrollingEnabled = false
@@ -70,7 +76,7 @@ class PostFragment : Fragment(), PostAdapter.OnItemClickListener {
 
     //open another activity for a new post
     private fun fab(){
-        postActivity_FAB.setOnClickListener{
+        postFragment_FAB.setOnClickListener{
             findNavController().navigate(R.id.makeNewPostFragment)
 
         }
@@ -125,14 +131,14 @@ class PostFragment : Fragment(), PostAdapter.OnItemClickListener {
 
     //Listen to SearchView for input values
     private fun listenToSearch(){
-        postActivity_searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        postFragment_searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                if (postActivity_searchView.isEmpty()){
+                if (postFragment_searchView.isEmpty()){
                     postRecyclerView.adapter = recyclerViewAdapter
                 }
                 else{
                     filter(newText)
-                    postActivity_searchView.setIconifiedByDefault(true)
+                    postFragment_searchView.setIconifiedByDefault(true)
                 }
                 return false
             }
@@ -141,7 +147,6 @@ class PostFragment : Fragment(), PostAdapter.OnItemClickListener {
             }
         } )
     }
-
 
 
     // Search post list by title and attach the filtered list to the adapter

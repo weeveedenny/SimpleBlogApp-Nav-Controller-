@@ -4,10 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="viewmodel"
-            type="com.decagon.android.sq009.viewmodels.PostViewModel"
-            />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +13,7 @@
         tools:context=".activities.PostFragment">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/postActivity_searchView"
+            android:id="@+id/postFragment_searchView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="16dp"
@@ -31,7 +28,7 @@
             app:queryHint="Search Blog" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/postActivity_recyclerView"
+            android:id="@+id/postFragment_recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="5dp"
@@ -41,23 +38,23 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/postActivity_searchView"
+            app:layout_constraintTop_toBottomOf="@id/postFragment_searchView"
             tools:listitem="@layout/post_layout" />
 
         <ImageView
-            android:id="@+id/postActivity_FAB_ImageView"
+            android:id="@+id/postFragment_FAB_ImageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:elevation="10dp"
             android:src="@drawable/group_1"
-            app:layout_constraintBottom_toBottomOf="@+id/postActivity_FAB"
-            app:layout_constraintEnd_toEndOf="@+id/postActivity_FAB"
-            app:layout_constraintStart_toStartOf="@+id/postActivity_FAB"
-            app:layout_constraintTop_toTopOf="@+id/postActivity_FAB" />
+            app:layout_constraintBottom_toBottomOf="@+id/postFragment_FAB"
+            app:layout_constraintEnd_toEndOf="@+id/postFragment_FAB"
+            app:layout_constraintStart_toStartOf="@+id/postFragment_FAB"
+            app:layout_constraintTop_toTopOf="@+id/postFragment_FAB" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/postActivity_FAB"
+            android:id="@+id/postFragment_FAB"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginEnd="32dp"

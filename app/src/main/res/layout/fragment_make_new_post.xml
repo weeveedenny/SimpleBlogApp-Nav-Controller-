@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/acme"
                 android:padding="8dp"
-                android:text= ""
+                android:text= "@string/Post_news"
                 android:textColor="@color/silver"
                 android:textSize="18sp"
                 android:textStyle="bold"

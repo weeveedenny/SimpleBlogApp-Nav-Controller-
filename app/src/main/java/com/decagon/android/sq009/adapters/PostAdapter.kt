@@ -7,18 +7,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.android.sq009.R
+import com.decagon.android.sq009.databinding.PostLayoutBinding
 import com.decagon.android.sq009.model.PostModel
 
 class PostAdapter( private val onClickListener: OnItemClickListener):
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     private var recyclerViewPostList: MutableList<PostModel> = mutableListOf()
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
 
-      val titleTextView: TextView = view.findViewById(R.id.post_layout_title_textView)
-      val bodyTextView:  TextView = view.findViewById(R.id.post_layout_body_textView)
+    inner class ViewHolder(val view: PostLayoutBinding): RecyclerView.ViewHolder(view.root), View.OnClickListener {
 
-      init { view.setOnClickListener(this) }
+
+      init {
+          view.root.setOnClickListener(this) }
 
       //function to respond to click on the recycler item
       override fun onClick(v: View?) {
@@ -28,6 +29,13 @@ class PostAdapter( private val onClickListener: OnItemClickListener):
                   onClickListener.onItemClick(recyclerViewPostList[adapterPosition], v!!)
               }
           }
+
+        //Passing data to the variable in xml
+        fun bind (postData: PostModel){
+            view.post = postData
+            view.executePendingBindings()
+            }
+
         }
 
         fun submitList(post: MutableList<PostModel>){
@@ -37,7 +45,7 @@ class PostAdapter( private val onClickListener: OnItemClickListener):
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.post_layout, parent, false)
-            return ViewHolder(view)
+            return ViewHolder(PostLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
 
     //Get the size of the list
@@ -47,8 +55,7 @@ class PostAdapter( private val onClickListener: OnItemClickListener):
 
     //Binds the view with the data
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.titleTextView.text = recyclerViewPostList[position].title
-            holder.bodyTextView.text = recyclerViewPostList[position].body
+            holder.bind(recyclerViewPostList[position])
         }
 
 
